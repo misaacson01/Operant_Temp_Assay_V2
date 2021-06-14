@@ -5,8 +5,8 @@ This repo contains code and instructions for installing, updating, and operating
 ## Getting Started
 
 ### Requirements
-Matlab (created using 2020b, no toolboxes necessary)
-Arduino IDE (for uploading/updating arduino code)
+-Matlab (created using 2020b, no toolboxes necessary)
+-Arduino IDE (for uploading/updating arduino code)
 
 ### Assembly
 To be added
