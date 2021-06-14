@@ -19,7 +19,7 @@ To be added
     c) Navigate to the file location where this repository was downloaded and click on the folder name
     d) "Save" and "Close"
 3) In the Matlab command window, type "edit TV2_Test_Experiment"
-4) In Matlab's "Editor" tab, click run
+4) In Matlab's "Editor" tab, click "Run"
 5) Watch the command window and the apparatus to check that everything is working correctly
 
 ## Running an experiment
