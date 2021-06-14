@@ -8,10 +8,10 @@ This repo contains code and instructions for installing, updating, and operating
 Matlab (created using 2020b, no toolboxes necessary)
 Arduino IDE (for uploading/updating arduino code)
 
-## Assembly
+### Assembly
 To be added
 
-## Installation
+### Installation
 1) Download this repository's code (with Github Desktop or your preferred SVN client)
 2) Open Matlab and add this repository to the list of paths:
     a) In Matlab's "Home" tab, click "Set Path"
