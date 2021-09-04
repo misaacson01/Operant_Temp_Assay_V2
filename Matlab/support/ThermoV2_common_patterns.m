@@ -10,7 +10,7 @@ function pattern = ThermoV2_common_patterns(name)
 
 switch lower(name)
     case 'left rectangle'
-        pattern.color1 = [0 0 1]; %[R G B] color of rectangle, 0-1 values
+        pattern.color1 = [1 1 1]; %[R G B] color of rectangle, 0-1 values
         pattern.backgroundcolor = [0 0 0]; %[R G B] color of background, 0-1 values
         pattern.position = [32 120 64 240]; %[xcenter ycenter width height], in pixels
         pattern.frequency = 0; %flicker frequency, in Hz
@@ -19,7 +19,7 @@ switch lower(name)
         pattern.trigger = 0; %wait for input trigger (1=wait, 0=don't wait)
         
     case 'middle rectangle'
-        pattern.color1 = [0 0 1]; 
+        pattern.color1 = [1 1 1]; 
         pattern.backgroundcolor = [0 0 0];
         pattern.position = [160 120 64 240]; 
         pattern.frequency = 0; 
@@ -28,7 +28,7 @@ switch lower(name)
         pattern.trigger = 0;
         
     case 'right rectangle'
-        pattern.color1 = [0 0 1];
+        pattern.color1 = [1 1 1];
         pattern.backgroundcolor = [0 0 0];
         pattern.position = [288 120 64 240];
         pattern.frequency = 0; 
@@ -37,12 +37,24 @@ switch lower(name)
         pattern.trigger = 0;
         
     case 'right grating'
-        pattern.color1 = [0 0 1];
+        pattern.color1 = [1 1 1];
         pattern.color2 = [0 0 0];
         pattern.backgroundcolor = [0 0 0.5];
         pattern.position = [160 120 320 240];
         pattern.barwidth = 40;
         pattern.angle = 0;
+        pattern.frequency = 2; 
+        pattern.duration = 0;
+        pattern.predelay = 0;
+        pattern.trigger = 0;
+        
+    case 'left grating'
+        pattern.color1 = [1 1 1];
+        pattern.color2 = [0 0 0];
+        pattern.backgroundcolor = [0 0 0.5];
+        pattern.position = [160 120 320 240];
+        pattern.barwidth = 40;
+        pattern.angle = 180;
         pattern.frequency = 2; 
         pattern.duration = 0;
         pattern.predelay = 0;

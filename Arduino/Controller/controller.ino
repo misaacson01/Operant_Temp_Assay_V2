@@ -34,7 +34,9 @@ typedef union {
 } binaryLong;
 
 //initialize variables
-uint8_t sensorVal, pin, commandID, fault, tmp;
+uint8_t pin, commandID, fault, tmp;
+int sensorVal;
+float curtemp;
 binaryLong curT, timestamp;
 binaryFloat dur, temp;
 binaryInt programID;
@@ -53,7 +55,7 @@ void setup() {
   for (i=0;i<8;i++) {
       pinMode(relayPins[i], OUTPUT);
       delay(1);
-      digitalWrite(relayPins[i], HIGH);
+      digitalWrite(relayPins[i], HIGH); //HIGH = off
   }
 
   //initialize thermocouple
@@ -92,6 +94,7 @@ bool check4end() {
 }
 void runDemo() {
   while (1) { //repeat indefinitely
+
     Serial.println("Testing relays");
     Serial.print("Pins: ");
     for (i=0;i<8;i++) {
@@ -102,7 +105,7 @@ void runDemo() {
       digitalWrite(relayPins[i], HIGH);
     }
     Serial.println("");
-
+    
     Serial.println("Testing sensors");
     Serial.print("Pins: ");
     for (i=0;i<3;i++) {
@@ -151,12 +154,15 @@ void loop() { //main program loop
       pin = Serial.read(); //byte 5
       
       //send pattern parameters back for verification
+      Serial.write(commandID);
+      timestamp.longInteger = millis();
+      Serial.write(timestamp.binary,4);
       Serial.write(dur.binary,4);
       Serial.write(pin);
 
-      digitalWrite(relayPins[pin], HIGH);
-      delay(1000*dur.floatingPoint);
       digitalWrite(relayPins[pin], LOW);
+      delay(1000*dur.floatingPoint);
+      digitalWrite(relayPins[pin], HIGH);
       break;
 
     case 121: //comand to read the temperature for a set duration
@@ -168,19 +174,24 @@ void loop() { //main program loop
       dur.binary[2] = Serial.read(); //byte 3
       dur.binary[3] = Serial.read(); //byte 4
 
-      //send pattern parameters back for verification
+      //send parameters back for verification
+      Serial.write(commandID);
+      timestamp.longInteger = millis();
+      Serial.write(timestamp.binary,4);
       Serial.write(dur.binary,4);
 
       startTime = millis();
       curT.longInteger = 0;
       endCommand = 0;
       while (endCommand==0) {
-        curT.longInteger=1000*(millis()-startTime);
-        temp.floatingPoint = maxthermo.readThermocoupleTemperature();
+        curT.longInteger=millis();
+        curtemp = maxthermo.readThermocoupleTemperature();
+        temp.floatingPoint = curtemp;
         Serial.write(151); //ID for temperature reading
         Serial.write(curT.binary,4);
         Serial.write(temp.binary,4);
         endCommand = check4end();
+        delay(100);
       }
       fault = maxthermo.readFault();
       if (fault) {
@@ -208,21 +219,29 @@ void loop() { //main program loop
       dur.binary[3] = Serial.read(); //byte 4
 
       //send pattern parameters back for verification
+      Serial.write(commandID);
+      timestamp.longInteger = millis();
+      Serial.write(timestamp.binary,4);
       Serial.write(dur.binary,4);
 
       startTime = millis();
       curT.longInteger = 0;
+      endCommand=0;
       while (endCommand==0) {
-        curT.longInteger=1000*(millis()-startTime);
+        curT.longInteger=millis();
         for (i=0;i<3;i++) {
           sensorVal = analogRead(sensorPins[i]);
-          if (sensorVal<128) {
+          if (sensorVal<512) {
             Serial.write(152);
             Serial.write(curT.binary,4);
             Serial.write(i);
             endCommand=1;
             break;
           }
+        }
+        delay(2);
+        if (endCommand==0) {
+          endCommand = check4end();
         }
       }
       break;

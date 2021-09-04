@@ -32,8 +32,7 @@ for i = 1:length(splist)
     if isfield(tmp,'program')
         switch tmp.program
             case 9340
-                tmp.log.datenum = [];
-                tmp.log.datestr = [];
+                tmp.log.prog_millis = [];
                 tmp.log.commandnum = [];
                 tmp.log.commandname = [];
                 tmp.log.duration = [];
@@ -59,8 +58,7 @@ for i = 1:length(splist)
                 end
 
             case 1000
-                tmp.log.datenum = [];
-                tmp.log.datestr = [];
+                tmp.log.prog_millis = [];
                 tmp.log.commandnum = [];
                 tmp.log.commandname = [];
                 tmp.log.pinnumber = [];

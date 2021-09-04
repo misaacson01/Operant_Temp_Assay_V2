@@ -5,7 +5,9 @@ function tmp = ThermoV2_read_serial(tmp)
     while tmp.serial.NumBytesAvailable>0
         command = read(tmp.serial,1,'uint8');
         if isfield(tmp,'log')
-            N = length(tmp.log)+1-isempty(tmp.log(1).datenum);
+            N = length(tmp.log)+1-isempty(tmp.log(1).prog_millis);
+        else
+            N=1;
         end
 
         switch command
@@ -19,8 +21,14 @@ function tmp = ThermoV2_read_serial(tmp)
                 bytes = read(tmp.serial,4,'uint8')';
                 t = now;
                 millis = typecast(uint8(bytes),'int32');
-                tmp.prog_start_datenum = addtodate(t,-millis,'millisecond');
-                tmp.prog_start_datestr = datestr(tmp.prog_start_datenum,'yy/mm/dd HH:MM:SS.fff');
+                if ~isfield(tmp,'pc_start_datestr')
+                    tmp.pc_datenum = t;
+                    tmp.prog_millis = millis;
+                    tmp.pc_start_datestr = datestr(t,'yy/mm/dd HH:MM:SS.fff');
+                else
+                    tmp(1).pc_datenum = [tmp.pc_datenum t];
+                    tmp(1).prog_millis = [tmp.prog_millis millis];
+                end
 
             case 101 %turn on backlight
                 tmp = log_timestamp(tmp,N);
@@ -116,17 +124,23 @@ function tmp = ThermoV2_read_serial(tmp)
 
             case 120 %toggle relay
                 tmp = log_timestamp(tmp,N);
+                bytes = read(tmp.serial,4,'uint8')';
+                tmp.log(N).duration = typecast(uint8(bytes),'single');
                 tmp.log(N).relay = read(tmp.serial,1,'uint8');
                 tmp.log(N).commandnum = command;
                 tmp.log(N).commandname = 'toggle relay';
                 
             case 121 %read temperature
                 tmp = log_timestamp(tmp,N);
+                bytes = read(tmp.serial,4,'uint8')';
+                tmp.log(N).duration = typecast(uint8(bytes),'single');
                 tmp.log(N).commandnum = command;
                 tmp.log(N).commandname = 'read temperature';
                 
             case 122 %read sensors
                 tmp = log_timestamp(tmp,N);
+                bytes = read(tmp.serial,4,'uint8')';
+                tmp.log(N).duration = typecast(uint8(bytes),'single');
                 tmp.log(N).commandnum = command;
                 tmp.log(N).commandname = 'read sensors';
                 
@@ -138,18 +152,27 @@ function tmp = ThermoV2_read_serial(tmp)
             case 151 %temperature reading
                 bytes = read(tmp.serial,4,'uint8')';
                 millis = typecast(uint8(bytes),'int32');
-                timestamp_num = addtodate(tmp.prog_start_datenum,millis,'millisecond');
-                tmp.log(1).temperature_time = [tmp.log(1).temperature_time timestamp_num];
-                
                 bytes = read(tmp.serial,4,'uint8');
                 temperature = typecast(uint8(bytes),'single');
-                tmp.log(1).temperature_read = [tmp.log(1).temperature_read temperature];
+                if ~isfield(tmp,'temperature_time')
+                    tmp.temperature_time = millis;
+                    tmp.temperature_read = temperature;
+                else
+                    tmp.temperature_time = [tmp.temperature_time millis];
+                    tmp.temperature_read = [tmp.temperature_read temperature];
+                end
                 
             case 152 %sensor reading
-                tmp = log_timestamp(tmp,N);
-                tmp.log(N).sensor = read(tmp.serial,1,'uint8');
-                tmp.log(N).commandnum = command;
-                tmp.log(N).commandname = 'sensor read';
+                bytes = read(tmp.serial,4,'uint8')';
+                millis = typecast(uint8(bytes),'int32');
+                sensor = read(tmp.serial,1,'uint8');
+                if ~isfield(tmp,'sensor_time')
+                    tmp.sensor_time = millis;
+                    tmp.sensor_read = sensor;
+                else
+                    tmp.sensor_time = [tmp.sensor_time millis];
+                    tmp.sensor_read = [tmp.sensor_read sensor];
+                end
                 
             case 200 %stop command
                 tmp = log_timestamp(tmp,N);
@@ -170,6 +193,5 @@ end
 function tmp = log_timestamp(tmp,N)
     bytes = read(tmp.serial,4,'uint8')';
     millis = typecast(uint8(bytes),'int32');
-    tmp.log(N).datenum = addtodate(tmp.prog_start_datenum,millis,'millisecond');
-    tmp.log(N).datestr = datestr(tmp.log(N).datenum,'HH:MM:SS.fff');
+    tmp.log(N).prog_millis = millis;
 end
