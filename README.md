@@ -6,7 +6,7 @@ This repo contains code and instructions for installing, updating, and operating
 
 ### Requirements
 - Matlab (created using 2020b, no toolboxes necessary). Download here: https://www.mathworks.com/products/matlab.html
-- Arduino IDE (for uploading/updating arduino code). Download here: 
+- Arduino IDE (for uploading/updating arduino code). Download here: https://www.arduino.cc/en/software
 - Arduino libraries: Adafruit MAX31856; Adafruit GFX; Adafruit Seesaw; Adafuit ST7735 and ST7789; Adafruit BUSIO
 - To install Arduino libraries: Open the Arduino IDE, Click "Tools" then "Manage libraries". Search for and install the 5 libraries listed above.
 
