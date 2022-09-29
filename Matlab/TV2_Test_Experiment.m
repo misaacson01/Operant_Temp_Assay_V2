@@ -1,5 +1,5 @@
 %% connect to displays and controller
-[controller, display1, display2] = ThermoV2_connect();
+[controller, display1, display2] = ThermoV2_connect_mac();
 
 
 %% show the "left rectangle" pattern on display 2

@@ -7,7 +7,7 @@ function [controller, display1, display2] = ThermoV2_connect_mac()
 
 %get list of all available serial ports
 splist = serialportlist("available");
-splist = splist(contains(splist,"dev/cu")); %narrow down list
+splist = splist(contains(splist,"dev/cu.usbserial")); %narrow down list
 
 %for every available serial port, query for version #
 for i = 1:length(splist)
