@@ -82,4 +82,10 @@ clear tmp;
 %check that all serial connections are established
 % assert(exist('display1','var'),'Did not detect display1');
 % assert(exist('display2','var'),'Did not detect display2');
+if ~exist('display1','var')
+    display1 = [];
+end
+if ~exist('display2','var')
+    display2 = [];
+end
 assert(exist('controller','var'),'Did not detect controller');
