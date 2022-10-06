@@ -80,6 +80,6 @@ end
 clear tmp;
 
 %check that all serial connections are established
-assert(exist('display1','var'),'Did not detect display1');
-assert(exist('display2','var'),'Did not detect display2');
+% assert(exist('display1','var'),'Did not detect display1');
+% assert(exist('display2','var'),'Did not detect display2');
 assert(exist('controller','var'),'Did not detect controller');
