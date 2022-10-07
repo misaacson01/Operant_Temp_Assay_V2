@@ -50,6 +50,9 @@ switch command
         write(tmp.serial,122,'uint8');
         write(tmp.serial,param.duration,'single');
         
+    case 'Test-sensors'
+        write(tmp.serial,123,'uint8');
+        
     case 'Stop'
         write(tmp.serial,200,'uint8');
         

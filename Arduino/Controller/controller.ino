@@ -39,9 +39,9 @@ int sensorVal;
 float curtemp;
 binaryLong curT, timestamp;
 binaryFloat dur, temp;
-binaryInt programID;
+binaryInt programID, absoluteSensorVal;
 long startTime;
-int i;
+int i, j;
 int readDelay = 10;
 bool endCommand = 0;
 
@@ -246,7 +246,21 @@ void loop() { //main program loop
       }
       break;
 
-
+    case 123: //get absolute sensor readings
+      Serial.write(commandID);
+      timestamp.longInteger = millis();
+      Serial.write(timestamp.binary,4);
+      for (j=0;j<5;j++) {
+        for (i=0;i<3;i++) {
+          absoluteSensorVal.integer = analogRead(sensorPins[i]);
+          Serial.write(153);
+          Serial.write(absoluteSensorVal.binary,2);
+          Serial.write(i);
+        }
+        delay(1000);
+      }
+      break;
+      
     case 200: //stop command recieved
       Serial.write(commandID);
       timestamp.longInteger = millis();

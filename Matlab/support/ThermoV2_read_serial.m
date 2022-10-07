@@ -144,6 +144,11 @@ function tmp = ThermoV2_read_serial(tmp)
                 tmp.log(N).commandnum = command;
                 tmp.log(N).commandname = 'read sensors';
                 
+            case 123 %test sensors
+                tmp = log_timestamp(tmp,N);
+                tmp.log(N).commandnum = command;
+                tmp.log(N).commandname = 'test sensors';
+                
             case 150 %input trigger
                 tmp = log_timestamp(tmp,N);
                 tmp.log(N).commandnum = command;
@@ -173,6 +178,12 @@ function tmp = ThermoV2_read_serial(tmp)
                     tmp.sensor_time = [tmp.sensor_time millis];
                     tmp.sensor_read = [tmp.sensor_read sensor];
                 end
+                
+            case 153 %absolute sensor readings
+                bytes = read(tmp.serial,2,'uint8')';
+                abs_sensor_val = typecast(uint8(bytes),'int16');
+                sensor = read(tmp.serial,1,'uint8');
+                fprintf(['sensor ' num2str(sensor) ': ' num2str(abs_sensor_val) '\n']);                
                 
             case 200 %stop command
                 tmp = log_timestamp(tmp,N);

@@ -47,3 +47,9 @@ param.duration = 5;
 ThermoV2_send_command(controller, 'Read-sensors', param);
 pause(6)
 controller = ThermoV2_read_serial(controller);
+
+
+%% test sensors for 5 s
+ThermoV2_send_command(controller, 'Test-sensors');
+pause(6)
+controller = ThermoV2_read_serial(controller);
