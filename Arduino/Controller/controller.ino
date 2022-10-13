@@ -255,7 +255,7 @@ void loop() { //main program loop
           absoluteSensorVal.integer = analogRead(sensorPins[i]);
           Serial.write(153);
           Serial.write(absoluteSensorVal.binary,2);
-          Serial.write(i);
+          Serial.write(byte(i));
         }
         delay(1000);
       }
