@@ -33,6 +33,7 @@ for i = 0:7
     ThermoV2_send_command(controller, 'Toggle-relay', param);
     pause(2);
 end
+controller = ThermoV2_read_serial(controller);
 
 
 %% read temperature for 5 s
