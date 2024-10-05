@@ -2,30 +2,70 @@
 
 This repo contains code and instructions for installing, updating, and operating the Hoon lab operant temperature apparatus (V2).
 
-## Getting Started
+## Hardware installation
+1) Order all off-the-shelf tubing and electronic parts according to the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx).
+2) Order all custom 3D printable parts listed in the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx). Stl files needed to print the parts can be found in the [3D Prints](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints) folder.
+    * To order custom prints online, use a 3D print service such as [Craftcloud](https://craftcloud3d.com/) by uploading the .stl files located in the [3D Prints folder](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints).
+    * To print the parts yourself, we recommended using an FDM printer such as the [Prusa MK4S](https://www.prusa3d.com/product/original-prusa-mk4s-3d-printer-5/) using PLA filament.
+    * Whether going through a service or printing yourself, these are our suggested print parameters:
+        * File units: millimeters
+        * Printing process type: FDM
+        * Material: PLA
+        * Infill: 20%
+        * Support: none
+        * Layer Height: 300 micrometers (or less)
+        * Finish: Standard/As printed/No finish
+        * Print orientation: default
+        * Tolerance: 500 micrometers (or less)
+3) Assemble the nose poke detectors
+    * Solder the photo interrupter, a 200 Ohm resistor, and ~0.5 m each of 3 hookup wires (red=power, black=ground, and yellow=signal) to the photo interrupter breakout PCB. Repeat this step to create 3 assembled photo interrupters
+    * Place each nose poke detector into the matching slots of the Thermobox 3D print
+4) Assemble the liquid reward delivery valves
+    * Using black hookup wire, connect the negative (ground) screw terminal of the 2.1 mm power jack to the center screw terminal of a relay in the relay module
+    * Using another black wire, connect the "normally open" screw terminal of the relay to one of the two pins of a small solenoid valve (the wire may need to be soldered to the solenoid valve pin)
+    * Using a red wire, connect the other pin of the solenoid valve to the positive (power) screw terminal of the 2.1 mm power jack
+    * Solder a diode between the two pins of the small solenoid valve, orientating the diode so that current can flow from the negative pin to the positive pin (the positive pin is the one which is wired to the positive terminal of the power jack)
+    * Repeat these steps for 3 water reward valves
+    * Plug in a 12 V (1+ A) power cord to the 2.1 mm power jack
+6) Assemble the liquid reward delivery tubing
+    * Connect a water reservoir (e.g. a large syringe tube) to the top ports of each of the liquid reward solenoid valves using masteflex tubing. Use Tee connectors to split the tubing from the reservoir so that all valves are connected
+    * Connect the lower ports of each liquid reward solenoid valve to the reward spounts on the Thermobox (the holes above the nose poke detectors)
+    * The water rewards are gravity-fed, so the reservoir should be mounted 6-12" above the height of the reward spouts
+8) Assembled the LED display boards
+    * [displays are deprecated, to be replaced with newer I2C displays]
+9) Assemble the water bath valves and large tubing
+    * Hook up water baths and valves according to the [tubing diagram](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/docs/Thermo%20Assay%20V2%20Diagrams.pptx)
+    * Connect the large ans small solenoid valves to power similarly as was done fot the liquid reward small solenoid valves
+10) Assemble the water bath small tubing
+    * Using the ThermoTemplate 3D print, wind the copper tubing into the slots of the template to bend the copper tubing into a shape of a regularly-spaced grid. Remove the copper tubing from the template when finished
+    * Connect the copper tubing to the small valve tubing according to the [tubing diagram](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/docs/Thermo%20Assay%20V2%20Diagrams.pptx)
+    * Slide the copper tubing grid into the floor slot of the Thermobox
 
-### Requirements
-- Matlab (created using 2020b, no toolboxes necessary). Download here: https://www.mathworks.com/products/matlab.html
-- Arduino IDE (for uploading/updating arduino code). Download here: https://www.arduino.cc/en/software
-- Arduino libraries: Adafruit MAX31856; Adafruit GFX; Adafruit Seesaw; Adafuit ST7735 and ST7789; Adafruit BUSIO
-- To install Arduino libraries: Open the Arduino IDE, Click "Tools" then "Manage libraries". Search for and install the 5 libraries listed above.
+## Software Installation
 
-### Assembly
-1. Hook up water baths according to the tubing diagram locating in /docs/Thermo Assay V2 Diagrams.pptx
-2. Hook up the water reward reservoir to the tubing coming from the 3 reward valves (R1, R2, R3). The water rewards are gravity-fed, so the water reward reservoir should be mounted at a height somewhat above the height of the reward spouts. 6-12 inches above the reward spout is typically all that's needed to provide adequate water pressure.
-3. Plug in a 12 V (1+ A) power cord to the "12 V" labelled power jack (The 5 V power cord is not necessary).
-4. Plug in the USB hub to the computer with Matlab and Arduino software installed.
+##### Install software on the host PC
+1) Install [Matlab](https://www.mathworks.com/products/matlab.html)
+2) Download this repository's code (with Github Desktop or your preferred SVN client)
+3) Open Matlab and add this repository to the list of paths:
+    * In Matlab's "Home" tab, click "Set Path"
+    * Click "Add with Subfolders"
+    * Navigate to the file location where this repository was downloaded and click on the folder name
+    * "Save" and "Close"
+4) Install the [Arduino IDE](https://www.arduino.cc/en/software).
+5) Open the Arduino IDE, click "Tools", then "Manage libraries". Install the following libraries: Adafruit MAX31856; Adafruit GFX; Adafruit Seesaw; Adafuit ST7735 and ST7789; Adafruit BUSIO
 
-### Custom Software Installation
-1) Download this repository's code (with Github Desktop or your preferred SVN client)
-2) Open Matlab and add this repository to the list of paths:
-    a) In Matlab's "Home" tab, click "Set Path"
-    b) Click "Add with Subfolders"
-    c) Navigate to the file location where this repository was downloaded and click on the folder name
-    d) "Save" and "Close"
-3) In the Matlab command window, type "edit TV2_Test_Experiment"
-4) In Matlab's "Editor" tab, click "Run"
-5) Watch the command window and the apparatus to check that everything is working correctly
+##### Install the Arduino controller firmware
+1) Plug in the Arduino microcontroller connected to the apparatus to the host PC.
+2) Open the Arduino IDE
+3) Select "Arduino Uno" from the microcontroller dropdown menu, and select the port which your Arduino is connected to
+    * if you don't know which port the Arduino is on, try disconnecting the Arduino to see which port disappears
+4) Download the controller.ino file from the [Arduino](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/Arduino) folder and load it in the Arduino IDE
+5) Upload the code to the Arduino
+
+##### Test the software installation
+1) In the Matlab command window, type "edit TV2_Test_Experiment"
+2) In Matlab's "Editor" tab, click "Run"
+3) Watch the command window and the apparatus to check that everything is working correctly
 
 ## Running an experiment
 To be added
