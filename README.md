@@ -18,21 +18,21 @@ This repo contains code and instructions for installing, updating, and operating
         * Print orientation: default
         * Tolerance: 500 micrometers (or less)
 3) Assemble the nose poke detectors
-    * Solder the photo interrupter, a 200 Ohm resistor, and ~0.5 m each of 3 hookup wires (red=power, black=ground, and yellow=signal) to the photo interrupter breakout PCB. Repeat this step to create 3 assembled photo interrupters
+    * Solder the photo interrupter, a 200 Ohm resistor, and ~0.5 m each of 3 hookup wires (red=power, black=ground, and yellow=signal) to the photo interrupter breakout PCB. Repeat this step to create 3 assembled photointerrupter-based nose poke detectors
     * Place each nose poke detector into the matching slots of the Thermobox 3D print
 4) Assemble the liquid reward delivery valves
     * Using black hookup wire, connect the negative (ground) screw terminal of the 2.1 mm power jack to the center screw terminal of a relay in the relay module
     * Using another black wire, connect the "normally open" screw terminal of the relay to one of the two pins of a small solenoid valve (the wire may need to be soldered to the solenoid valve pin)
     * Using a red wire, connect the other pin of the solenoid valve to the positive (power) screw terminal of the 2.1 mm power jack
-    * Solder a diode between the two pins of the small solenoid valve, orientating the diode so that current can flow from the negative pin to the positive pin (the positive pin is the one which is wired to the positive terminal of the power jack)
+    * Solder a diode between the two pins of the small solenoid valve, orienting the diode so that current can flow from the negative pin to the positive pin (the positive pin is the one which is wired to the positive terminal of the power jack)
     * Repeat these steps for 3 water reward valves
     * Plug in a 12 V (1+ A) power cord to the 2.1 mm power jack
 6) Assemble the liquid reward delivery tubing
     * Connect a water reservoir (e.g. a large syringe tube) to the top ports of each of the liquid reward solenoid valves using masteflex tubing. Use Tee connectors to split the tubing from the reservoir so that all valves are connected
     * Connect the lower ports of each liquid reward solenoid valve to the reward spounts on the Thermobox (the holes above the nose poke detectors)
-    * The water rewards are gravity-fed, so the reservoir should be mounted 6-12" above the height of the reward spouts
-8) Assembled the LED display boards
-    * [displays are deprecated, to be replaced with newer I2C displays]
+    * Mounted the water reservoir 6-12" above the height of the reward spouts (the water rewards are gravity-fed)
+8) Assemble the LED display boards
+    * [displays are deprecated, to be replaced with newer I2C displays such as [this one](https://www.adafruit.com/product/4741)]
 9) Assemble the water bath valves and large tubing
     * Hook up water baths and valves according to the [tubing diagram](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/docs/Thermo%20Assay%20V2%20Diagrams.pptx)
     * Connect the large ans small solenoid valves to power similarly as was done fot the liquid reward small solenoid valves
