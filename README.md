@@ -1,10 +1,11 @@
 # Operant_Temp_Assay_V2
 
-This repo contains code and instructions for installing, updating, and operating the Hoon lab operant temperature apparatus (V2).
+This repo contains code and instructions for assembling, installing, and operating the Hoon lab operant temperature apparatus (V2). This is an updated and modified version of the assay originally described by [Isaacson and Hoon, 2021](https://doi.org/10.1177/17448069211013633).
 
 ## Hardware installation
-1) Order all off-the-shelf tubing and electronic parts according to the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx).
-2) Order all custom 3D printable parts listed in the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx). Stl files needed to print the parts can be found in the [3D Prints](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints) folder.
+1) Order two recirculating water baths with external recirculation ports, such as []().
+2) Order all tubing, parts, and electronics according to the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx).
+3) Order all custom 3D printable parts listed in the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx). Stl files needed to print the parts can be found in the [3D Prints](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints) folder.
     * To order custom prints online, use a 3D print service such as [Craftcloud](https://craftcloud3d.com/) by uploading the .stl files located in the [3D Prints folder](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints).
     * To print the parts yourself, we recommended using an FDM printer such as the [Prusa MK4S](https://www.prusa3d.com/product/original-prusa-mk4s-3d-printer-5/) using PLA filament.
     * Whether going through a service or printing yourself, these are our suggested print parameters:
@@ -17,10 +18,10 @@ This repo contains code and instructions for installing, updating, and operating
         * Finish: Standard/As printed/No finish
         * Print orientation: default
         * Tolerance: 500 micrometers (or less)
-3) Assemble the nose poke detectors
+4) Assemble the nose poke detectors
     * Solder the photo interrupter, a 200 Ohm resistor, and ~0.5 m each of 3 hookup wires (red=power, black=ground, and yellow=signal) to the photo interrupter breakout PCB. Repeat this step to create 3 assembled photointerrupter-based nose poke detectors
     * Place each nose poke detector into the matching slots of the Thermobox 3D print
-4) Assemble the liquid reward delivery valves
+5) Assemble the liquid reward delivery valves
     * Using black hookup wire, connect the negative (ground) screw terminal of the 2.1 mm power jack to the center screw terminal of a relay in the relay module
     * Using another black wire, connect the "normally open" screw terminal of the relay to one of the two pins of a small solenoid valve (the wire may need to be soldered to the solenoid valve pin)
     * Using a red wire, connect the other pin of the solenoid valve to the positive (power) screw terminal of the 2.1 mm power jack
