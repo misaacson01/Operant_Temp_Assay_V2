@@ -3,7 +3,7 @@
 This repo contains code and instructions for assembling, installing, and operating the Hoon lab operant temperature apparatus (V2). This is an updated and modified version of the assay originally described by [Isaacson and Hoon, 2021](https://doi.org/10.1177/17448069211013633).
 
 ## Hardware installation
-1) Order two recirculating water baths with external recirculation ports, such as []().
+1) Order two recirculating water baths with external recirculation ports, such as [this one](https://www.polyscience.com/products/circulating-baths/refrigeratedheated-circulating-baths/refrigerated-circulator-7-liter-low-profile-sd-20-c).
 2) Order all tubing, parts, and electronics according to the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx).
 3) Order all custom 3D printable parts listed in the [parts list](https://github.com/misaacson01/Operant_Temp_Assay_V2/blob/main/Parts%20List.xlsx). Stl files needed to print the parts can be found in the [3D Prints](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints) folder.
     * To order custom prints online, use a 3D print service such as [Craftcloud](https://craftcloud3d.com/) by uploading the .stl files located in the [3D Prints folder](https://github.com/misaacson01/Operant_Temp_Assay_V2/tree/main/3D%20prints).
